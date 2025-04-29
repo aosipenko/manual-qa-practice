@@ -14,6 +14,11 @@ public class PersonController {
     @Autowired
     private PersonService personService;
 
+    @GetMapping("/v1/test")
+    public ResponseEntity<String> test() {
+        return ResponseEntity.ok("Test: OK");
+    }
+
     @GetMapping("/v1/person/{id}")
     public ResponseEntity<PersonDto> getPersonById(@PathVariable(name = "id") int id) {
         return ResponseEntity.ok(personService.getPerson(id));
