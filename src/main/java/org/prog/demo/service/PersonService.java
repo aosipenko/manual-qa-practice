@@ -17,6 +17,14 @@ public class PersonService {
     private PersonJpa personJpa;
 
     public String registerUser(PersonDto personDto) {
+        if (
+                !isValid(personDto.getNationatlity()) ||
+                !isValid(personDto.getGender()) ||
+                !isValid(personDto.getName().getFirstName()) ||
+                !isValid(personDto.getName().getLastName())
+        ) {
+            throw new IllegalArgumentException("Invalid name");
+        }
         personJpa.save(PersonTable.builder()
                 .firstName(personDto.getName().getFirstName())
                 .lastName(personDto.getName().getLastName())
@@ -51,6 +59,14 @@ public class PersonService {
     }
 
     public String updateUser(PersonDto dto) {
+        if (
+                !isValid(dto.getNationatlity()) ||
+                        !isValid(dto.getGender()) ||
+                        !isValid(dto.getName().getFirstName()) ||
+                        !isValid(dto.getName().getLastName())
+        ) {
+            throw new IllegalArgumentException("Invalid name");
+        }
         PersonTable entry = personJpa.findById(dto.getId()).orElseThrow();
         entry.setFirstName(dto.getName().getFirstName());
         entry.setLastName(dto.getName().getLastName());
@@ -64,5 +80,9 @@ public class PersonService {
     public String deleteUser(long id) {
         personJpa.deleteById(id);
         return "OK";
+    }
+
+    private boolean isValid(String value) {
+        return value.matches("[A-Za-z]+");
     }
 }
