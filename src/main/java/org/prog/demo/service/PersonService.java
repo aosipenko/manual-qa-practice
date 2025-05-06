@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -17,13 +18,13 @@ public class PersonService {
     private PersonJpa personJpa;
 
     public String registerUser(PersonDto personDto) {
-        if (
-                !isValid(personDto.getNationatlity()) ||
+        if (!isValid(personDto.getNationatlity()) ||
                 !isValid(personDto.getGender()) ||
+                !isGenderValid(personDto.getGender()) ||
                 !isValid(personDto.getName().getFirstName()) ||
                 !isValid(personDto.getName().getLastName())
         ) {
-            throw new IllegalArgumentException("Invalid name");
+            throw new IllegalArgumentException("Invalid input");
         }
         personJpa.save(PersonTable.builder()
                 .firstName(personDto.getName().getFirstName())
@@ -36,7 +37,12 @@ public class PersonService {
     }
 
     public PersonDto getPerson(long id) {
-        return personJpa.findById(id).map(this::fromBd).orElseThrow();
+        Optional<PersonTable> personTable = personJpa.findById(id);
+        if (personTable.isEmpty()) {
+            throw new IllegalArgumentException("No person with such id present in database.");
+        } else {
+            return personJpa.findById(id).map(this::fromBd).get();
+        }
     }
 
     public List<PersonDto> listPersons() {
@@ -60,6 +66,7 @@ public class PersonService {
 
     public String updateUser(PersonDto dto) {
         if (
+                !isGenderValid(dto.getGender()) ||
                 !isValid(dto.getNationatlity()) ||
                         !isValid(dto.getGender()) ||
                         !isValid(dto.getName().getFirstName()) ||
@@ -83,6 +90,10 @@ public class PersonService {
     }
 
     private boolean isValid(String value) {
-        return value.matches("[A-Za-z]+");
+        return value.length() < 30 && value.matches("[A-Za-z]+");
+    }
+
+    private boolean isGenderValid(String gender) {
+        return gender.equals("male") || gender.equals("female");
     }
 }
