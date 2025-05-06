@@ -66,9 +66,9 @@ public class PersonService {
 
     public String updateUser(PersonDto dto) {
         if (
-                !isGenderValid(dto.getGender()) ||
                 !isValid(dto.getNationatlity()) ||
                         !isValid(dto.getGender()) ||
+                        !isValid(dto.getName().getTitle()) ||
                         !isValid(dto.getName().getFirstName()) ||
                         !isValid(dto.getName().getLastName())
         ) {
