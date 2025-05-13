@@ -16,7 +16,7 @@ public class InterviewExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.badRequest().body(ex.getMessage());
     }
 
-    @ExceptionHandler(Exception.class)
+    @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<Object> handle(RuntimeException ex) {
         return ResponseEntity.badRequest().body(ex.getMessage());
     }
