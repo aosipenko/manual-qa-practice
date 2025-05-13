@@ -34,7 +34,7 @@ public class PersonController {
         return ResponseEntity.ok(personService.updateUser(id, dto));
     }
 
-    @PostMapping("/v1/person/{id}")
+    @PostMapping("/v1/person")
     public ResponseEntity<String> createPerson(@RequestBody PersonDto dto) {
         return ResponseEntity.ok(personService.registerUser(dto));
     }
