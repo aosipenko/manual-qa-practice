@@ -29,12 +29,12 @@ public class PersonController {
         return ResponseEntity.ok(personService.listPersons());
     }
 
-    @PutMapping("/v1/person")
-    public ResponseEntity<String> updatePerson(@RequestBody PersonDto dto) {
-        return ResponseEntity.ok(personService.updateUser(dto));
+    @PutMapping("/v1/person/{id}")
+    public ResponseEntity<String> updatePerson(@PathVariable (name = "id") long id, @RequestBody PersonDto dto) {
+        return ResponseEntity.ok(personService.updateUser(id, dto));
     }
 
-    @PostMapping("/v1/person")
+    @PostMapping("/v1/person/{id}")
     public ResponseEntity<String> createPerson(@RequestBody PersonDto dto) {
         return ResponseEntity.ok(personService.registerUser(dto));
     }

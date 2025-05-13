@@ -64,7 +64,7 @@ public class PersonService {
                 .build();
     }
 
-    public String updateUser(PersonDto dto) {
+    public String updateUser(long id, PersonDto dto) {
         if (
                 !isValid(dto.getNationatlity()) ||
                         !isValid(dto.getGender()) ||
@@ -74,7 +74,7 @@ public class PersonService {
         ) {
             throw new IllegalArgumentException("Invalid name");
         }
-        PersonTable entry = personJpa.findById(dto.getId()).orElseThrow();
+        PersonTable entry = personJpa.findById(id).orElseThrow();
         entry.setFirstName(dto.getName().getFirstName());
         entry.setLastName(dto.getName().getLastName());
         entry.setTitle(dto.getName().getTitle());

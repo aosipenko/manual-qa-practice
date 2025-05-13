@@ -10,7 +10,7 @@
 ### GET /v1/person
 має поверати всі записи з бази даних
 
-### GET /v1/person/{Id}
+### GET /v1/person/{id}
 має поверати персону за номером personId з бази даних. Якщо людини з таким id не існує, має повернути 404: No person with such id is present in database.
 
 ### PUT /v1/person/{id}
