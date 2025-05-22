@@ -3,7 +3,7 @@ services:
   db:
     networks:
       - demo-net
-    hostname: 'mysql-docker-compose'
+    hostname: 'demo-sql'
     image: mysql:5.7
     restart: always
     environment:
@@ -12,7 +12,7 @@ services:
       MYSQL_PASSWORD: 'password'
       MYSQL_ROOT_PASSWORD: 'password'
     ports:
-      - '3307:3306'
+      - '3306:3306'
     expose:
       - '3306'
     volumes:

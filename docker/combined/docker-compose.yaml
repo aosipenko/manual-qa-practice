@@ -1,8 +1,11 @@
- version: '3.3'
+version: '3.3'
 services:
+#===========MYSQL CONFIG================
   db:
-    platform: linux/x86_64
-    hostname: 'mysql-docker'
+    container_name: mysql
+    networks:
+      - demo-net
+    hostname: 'demo-sql'
     image: mysql:5.7
     restart: always
     environment:
@@ -16,5 +19,16 @@ services:
       - '3306'
     volumes:
       - my-db:/var/lib/mysql
+#===========BUSYBOX CONFIG================
+  busybox:
+    networks:
+      - demo-net
+    image: busybox
+    container_name: busybox
+    command: sh -c "while true; do sleep 3600; done"
+
 volumes:
   my-db:
+networks:
+  demo-net:
+    driver: bridge
