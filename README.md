@@ -8,19 +8,16 @@
 
 ## Endpoints logic
 ### GET /v1/person
-має поверати всі записи з бази даних
+list all entries in Persons table
 
 ### GET /v1/person/{id}
-має поверати персону за номером personId з бази даних. Якщо людини з таким id не існує, має повернути 404: No person with such id is present in database.
+Returns person by ID as json data. If no such id present - 404: No person with such id is present in database.
 
 ### PUT /v1/person/{id}
-має оновлювати дані людини з цим id . Всі поля мають містити тільки стандартні латинські символи. Якщо будь-яке поле містить цифри чи нетипові латинські символи, сервіс має відповісти 400 bad request. Поле "gender" може містити тільки male або female. Довжина будь якого поля не має перевищувати 30 символів.
+Updates Perons record by id . May contain only latin characters, no numerics, no null values;
 
 ### POST /v1/person
-має створювати записи в БД, з тими ж обмеження що і PUT ендпоїнт. Якщо post запит містить id особи, цей id має бути проігноровано, і база даних сама має надати id для нового запису.
-
-### Remove Person
-DELETE /v1/person
+Create Perons. ay contain only latin characters, no numerics, no null values. Id is autoassigned by DB.
 
 ### DELETE /v1/person/{id}
-має видаляти запис з бази даних за його id . Якщо запису з таким id не існує, має все одно поверати 200 OK
+Removes record by id

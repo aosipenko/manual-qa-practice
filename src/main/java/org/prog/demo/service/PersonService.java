@@ -18,12 +18,7 @@ public class PersonService {
     private PersonJpa personJpa;
 
     public String registerUser(PersonDto personDto) {
-        if (!isValid(personDto.getNationatlity()) ||
-                !isValid(personDto.getGender()) ||
-                !isGenderValid(personDto.getGender()) ||
-                !isValid(personDto.getName().getFirstName()) ||
-                !isValid(personDto.getName().getLastName())
-        ) {
+        if (!dtoFieldsAreValid(personDto)) {
             throw new IllegalArgumentException("Invalid input");
         }
         personJpa.save(PersonTable.builder()
@@ -65,13 +60,7 @@ public class PersonService {
     }
 
     public String updateUser(long id, PersonDto dto) {
-        if (
-                !isValid(dto.getNationatlity()) ||
-                        !isValid(dto.getGender()) ||
-                        !isValid(dto.getName().getTitle()) ||
-                        !isValid(dto.getName().getFirstName()) ||
-                        !isValid(dto.getName().getLastName())
-        ) {
+        if (!dtoFieldsAreValid(dto)) {
             throw new IllegalArgumentException("Invalid name");
         }
         PersonTable entry = personJpa.findById(id).orElseThrow();
@@ -90,10 +79,14 @@ public class PersonService {
     }
 
     private boolean isValid(String value) {
-        return value.length() < 30 && value.matches("[A-Za-z]+");
+        return value != null && value.length() < 30 && value.matches("[A-Za-z]+");
     }
 
-    private boolean isGenderValid(String gender) {
-        return gender.equals("male") || gender.equals("female");
+    private boolean dtoFieldsAreValid(PersonDto personDto) {
+        return isValid(personDto.getNationatlity()) ||
+                isValid(personDto.getGender()) ||
+                isValid(personDto.getName().getTitle()) ||
+                isValid(personDto.getName().getFirstName()) ||
+                isValid(personDto.getName().getLastName());
     }
 }
