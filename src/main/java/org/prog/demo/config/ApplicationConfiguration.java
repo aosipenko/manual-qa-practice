@@ -25,6 +25,6 @@ public class ApplicationConfiguration {
     }
 
     private String getSQLHost() {
-        return "jdbc:mysql://demo-sql:3306/db";
+        return "jdbc:mysql://demo-sql:3306/db?useSSL=false&allowPublicKeyRetrieval=true";
     }
 }
