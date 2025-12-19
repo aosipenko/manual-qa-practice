@@ -22,7 +22,7 @@
 ### DELETE /v1/person/{id}
 має видаляти запис з бази даних за його id . Якщо запису з таким id не існує, має все одно поверати 200 OK
 
-###JSON тіла запиту 
+### JSON тіла запиту 
 {
 "firstName" : "John",
 "lastName" : "Doe",
@@ -31,7 +31,7 @@
 "title" : "Mr"
 }
 
-###таблиця Persons в базі даних 
+### таблиця Persons в базі даних 
 PersonId - INT
 FIRST_NAME - TEXT
 LAST_NAME - TEXT
