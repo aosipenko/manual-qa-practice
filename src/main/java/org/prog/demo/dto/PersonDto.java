@@ -14,7 +14,7 @@ public class PersonDto {
 
     private String gender;
 
-    private String nationatlity;
+    private String nationality;
 
     private NameDto name;
 }
