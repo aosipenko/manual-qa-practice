@@ -18,7 +18,7 @@ public class PersonService {
     private PersonJpa personJpa;
 
     public String registerUser(PersonDto personDto) {
-        if (!isValid(personDto.getNationatlity()) ||
+        if (!isValid(personDto.getNationality()) ||
                 !isValid(personDto.getGender()) ||
                 !isGenderValid(personDto.getGender()) ||
                 !isValid(personDto.getName().getFirstName()) ||
@@ -31,7 +31,7 @@ public class PersonService {
                 .lastName(personDto.getName().getLastName())
                 .title(personDto.getName().getTitle())
                 .gender(personDto.getGender())
-                .nat(personDto.getNationatlity())
+                .nat(personDto.getNationality())
                 .build());
         return "OK";
     }
@@ -59,14 +59,14 @@ public class PersonService {
                                 .build()
                 )
                 .gender(personTable.getGender())
-                .nationatlity(personTable.getNat())
+                .nationality(personTable.getNat())
                 .id(personTable.getPersonId())
                 .build();
     }
 
     public String updateUser(long id, PersonDto dto) {
         if (
-                !isValid(dto.getNationatlity()) ||
+                !isValid(dto.getNationality()) ||
                         !isValid(dto.getGender()) ||
                         !isValid(dto.getName().getTitle()) ||
                         !isValid(dto.getName().getFirstName()) ||
@@ -79,7 +79,7 @@ public class PersonService {
         entry.setLastName(dto.getName().getLastName());
         entry.setTitle(dto.getName().getTitle());
         entry.setGender(dto.getGender());
-        entry.setNat(dto.getNationatlity());
+        entry.setNat(dto.getNationality());
         personJpa.save(entry);
         return "OK";
     }
