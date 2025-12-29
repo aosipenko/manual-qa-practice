@@ -24,11 +24,14 @@
 
 ### JSON тіла запиту 
 {
-"firstName" : "John",
-"lastName" : "Doe",
-"gender" : "male",
-"nationality" : "us",
-"title" : "Mr"
+"id": "1",
+"gender": "female",
+"nationality": "US",
+"name": {
+"firstName": "Jane",
+"lastName": "Doe",
+"title": "Mrs"
+}
 }
 
 ### таблиця Persons в базі даних 
